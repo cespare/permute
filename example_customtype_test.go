@@ -13,7 +13,7 @@ func (s ByteSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 func Example_customType() {
 	b := []byte{'A', 'B', 'C'}
-	p := permute.Permute(ByteSlice(b))
+	p := permute.NewPermuter(ByteSlice(b))
 	for p.Permute() {
 		fmt.Println(string(b))
 	}

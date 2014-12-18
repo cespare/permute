@@ -33,9 +33,9 @@ type Interface interface {
 	Swap(i, j int)
 }
 
-// Permute gives a Permuter to generate all permutations
+// NewPermuter gives a Permuter to generate all permutations
 // of the elements of v.
-func Permute(v Interface) *Permuter {
+func NewPermuter(v Interface) *Permuter {
 	return &Permuter{
 		iface:    v,
 		started:  false,
@@ -98,7 +98,7 @@ func (s intSlice) Len() int      { return len(s) }
 func (s intSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 // Ints is a convenience function for generating permutations of []ints.
-func Ints(s []int) *Permuter { return Permute(intSlice(s)) }
+func Ints(s []int) *Permuter { return NewPermuter(intSlice(s)) }
 
 type stringSlice []string
 
@@ -106,4 +106,4 @@ func (s stringSlice) Len() int      { return len(s) }
 func (s stringSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 // Strings is a convenience function for generating permutations of []strings.
-func Strings(s []string) *Permuter { return Permute(stringSlice(s)) }
+func Strings(s []string) *Permuter { return NewPermuter(stringSlice(s)) }
