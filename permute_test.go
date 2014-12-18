@@ -1,26 +1,10 @@
 package permute
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 	"testing"
 )
-
-func ExamplePermute() {
-	s := []string{"A", "B", "C"}
-	p := Strings(s)
-	for p.Permute() {
-		fmt.Println(strings.Join(s, ""))
-	}
-	// Output:
-	// ABC
-	// BAC
-	// CAB
-	// ACB
-	// BCA
-	// CBA
-}
 
 func TestSimple(t *testing.T) {
 	for _, tc := range []struct {
