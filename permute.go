@@ -85,10 +85,9 @@ func (p *Permuter) Permute() bool {
 			p.c[p.i]++
 			p.i = 0
 			return true
-		} else {
-			p.c[p.i] = 0
-			p.i++
 		}
+		p.c[p.i] = 0
+		p.i++
 	}
 }
 
