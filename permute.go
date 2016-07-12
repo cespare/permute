@@ -36,11 +36,7 @@ type Interface interface {
 // NewPermuter gives a Permuter to generate all permutations
 // of the elements of v.
 func NewPermuter(v Interface) *Permuter {
-	return &Permuter{
-		iface:    v,
-		started:  false,
-		finished: false,
-	}
+	return &Permuter{iface: v}
 }
 
 // A Permuter holds state about an ongoing iteration of permutations.
@@ -58,18 +54,17 @@ type Permuter struct {
 // If it returns false, the iteration is finished.
 func (p *Permuter) Permute() bool {
 	if p.finished {
-		panic("Permute() called on finished Permuter")
+		panic("Permute called on finished Permuter")
 	}
 	if !p.started {
 		p.started = true
 		p.n = p.iface.Len()
 		p.p = make([]int, p.n)
 		p.c = make([]int, p.n)
-		for i := 0; i < p.n; i++ {
+		for i := range p.p {
 			p.p[i] = i
 			p.c[i] = 0
 		}
-		p.i = 0
 		return true
 	}
 	for {

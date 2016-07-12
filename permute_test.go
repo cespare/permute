@@ -7,7 +7,7 @@ import (
 )
 
 func TestSimple(t *testing.T) {
-	for _, tc := range []struct {
+	for _, tt := range []struct {
 		in  string
 		out []string
 	}{
@@ -17,27 +17,27 @@ func TestSimple(t *testing.T) {
 		{"ABC", []string{"ABC", "BAC", "CAB", "ACB", "BCA", "CBA"}},
 	} {
 		want := make(map[string]struct{})
-		for _, w := range tc.out {
+		for _, w := range tt.out {
 			want[w] = struct{}{}
 		}
-		s := strings.Split(tc.in, "")
+		s := strings.Split(tt.in, "")
 		p := Strings(s)
 		got := make(map[string]struct{})
 		for p.Permute() {
 			got[strings.Join(s, "")] = struct{}{}
 		}
-		if !reflect.DeepEqual(want, got) {
-			t.Errorf("want: %v; got: %v", want, got)
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v; want %v", got, want)
 		}
 	}
 }
 
 func fact(n int) int {
-	result := 1
+	m := 1
 	for ; n > 1; n-- {
-		result *= n
+		m *= n
 	}
-	return result
+	return m
 }
 
 type byteSlice []byte
@@ -56,10 +56,8 @@ func TestBrute(t *testing.T) {
 		for p.Permute() {
 			perms[string(s)] = struct{}{}
 		}
-		want := fact(n)
-		got := len(perms)
-		if want != got {
-			t.Errorf("fail on n=%d: want %d; got %d", n, want, got)
+		if got, want := len(perms), fact(n); got != want {
+			t.Fatalf("fail at n=%d: got %d; want %d", n, got, want)
 		}
 	}
 }
