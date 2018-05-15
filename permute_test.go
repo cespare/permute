@@ -51,7 +51,7 @@ func TestBrute(t *testing.T) {
 		for i := range s {
 			s[i] = byte(i) + 'a'
 		}
-		p := NewPermuter(byteSlice(s))
+		p := New(byteSlice(s))
 		perms := make(map[string]struct{})
 		for p.Permute() {
 			perms[string(s)] = struct{}{}
