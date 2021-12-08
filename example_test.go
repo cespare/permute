@@ -8,7 +8,7 @@ import (
 
 func Example_ints() {
 	s := []int{5, 7}
-	p := permute.Ints(s)
+	p := permute.Slice(s)
 	for p.Permute() {
 		fmt.Println(s)
 	}

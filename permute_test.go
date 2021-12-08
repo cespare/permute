@@ -21,7 +21,7 @@ func TestSimple(t *testing.T) {
 			want[w] = struct{}{}
 		}
 		s := strings.Split(tt.in, "")
-		p := Strings(s)
+		p := Slice(s)
 		got := make(map[string]struct{})
 		for p.Permute() {
 			got[strings.Join(s, "")] = struct{}{}
@@ -40,18 +40,13 @@ func fact(n int) int {
 	return m
 }
 
-type byteSlice []byte
-
-func (s byteSlice) Len() int      { return len(s) }
-func (s byteSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-
 func TestBrute(t *testing.T) {
 	for n := 0; n <= 9; n++ {
 		s := make([]byte, n)
 		for i := range s {
 			s[i] = byte(i) + 'a'
 		}
-		p := New(byteSlice(s))
+		p := Slice(s)
 		perms := make(map[string]struct{})
 		for p.Permute() {
 			perms[string(s)] = struct{}{}

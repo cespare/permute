@@ -88,18 +88,10 @@ func (p *Permuter) Permute() bool {
 	}
 }
 
-type intSlice []int
+type slice[T any] []T
 
-func (s intSlice) Len() int      { return len(s) }
-func (s intSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s slice[T]) Len() int { return len(s) }
+func (s slice[T]) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
-// Ints is a convenience function for generating permutations of []ints.
-func Ints(s []int) *Permuter { return New(intSlice(s)) }
-
-type stringSlice []string
-
-func (s stringSlice) Len() int      { return len(s) }
-func (s stringSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-
-// Strings is a convenience function for generating permutations of []strings.
-func Strings(s []string) *Permuter { return New(stringSlice(s)) }
+// Slice constructs a Permuter for a slice.
+func Slice[T any](s []T) *Permuter { return New(slice[T](s)) }
