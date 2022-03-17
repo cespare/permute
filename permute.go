@@ -90,8 +90,8 @@ func (p *Permuter) Permute() bool {
 
 type slice[T any] []T
 
-func (s slice[T]) Len() int { return len(s) }
+func (s slice[T]) Len() int      { return len(s) }
 func (s slice[T]) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 // Slice constructs a Permuter for a slice.
-func Slice[T any](s []T) *Permuter { return New(slice[T](s)) }
+func Slice[S ~[]T, T any](s S) *Permuter { return New(slice[T](s)) }
