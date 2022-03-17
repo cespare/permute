@@ -3,7 +3,7 @@ package permute_test
 import (
 	"fmt"
 
-	"github.com/cespare/permute"
+	"github.com/cespare/permute/v2"
 )
 
 func Example_ints() {
